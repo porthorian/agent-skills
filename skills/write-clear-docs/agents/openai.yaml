@@ -1,0 +1,5 @@
+interface:
+  display_name: "Clear Documentation"
+  short_description: "Write clear docs with optional independent review"
+policy:
+  allow_implicit_invocation: false

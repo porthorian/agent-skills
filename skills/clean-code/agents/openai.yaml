@@ -1,0 +1,6 @@
+interface:
+  display_name: "Clean Code"
+  short_description: "Write readable code and reuse shared behavior"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,11 +1,17 @@
 ---
 name: github-create-pr
-description: "Write concise GitHub PR titles and descriptions with captured test output and logs. Use when creating a PR from a pushed branch or updating PR title/body text. Code changes, commits, and pushes remain outside this skill's scope."
+description: "Use whenever the user asks to create or open a GitHub pull request (PR), including as part of a larger implementation task. Write concise titles and descriptions with captured test output and logs. Also use for PR title/body updates."
 ---
 
 # Create GitHub PR
 
 Produce a clear title and description grounded in the change, with direct test evidence. Publish when requested; otherwise return the proposed text.
+
+## When to use
+
+Apply this skill whenever the user's task asks for a GitHub PR to be created, opened, made, raised, or submitted. Requests such as "create a PR," "open a pull request," "turn this into a PR," and "implement this and open a PR" select this skill without requiring the user to name it. Also apply it to requests to update PR titles or descriptions.
+
+Apply it to the PR portion of a broader task even before the branch is committed or pushed. Prerequisite implementation and Git work remains with the surrounding authorized workflow; the branch's current state does not prevent selecting this skill.
 
 ## Establish the change
 

@@ -1,11 +1,11 @@
 ---
 name: github-create-pr
-description: "Use whenever the user asks to create or open a GitHub pull request (PR), including as part of a larger implementation task. Write concise titles and descriptions with captured test output and logs. Also use for PR title/body updates."
+description: "Use whenever the user asks to create or open a GitHub pull request (PR), including as part of a larger implementation task. Follow repository PR templates exactly and include test evidence that CI does not cover. Also use for PR title/body updates."
 ---
 
 # Create GitHub PR
 
-Produce a clear title and description grounded in the change, with direct test evidence. Publish when requested; otherwise return the proposed text.
+Produce a concise title and description grounded in the change, following the repository's PR template and including additional test evidence beyond CI. Publish when requested; otherwise return the proposed text.
 
 ## When to use
 
@@ -15,34 +15,49 @@ Apply it to the PR portion of a broader task even before the branch is committed
 
 ## Establish the change
 
-Read the request, applicable repository instructions, actual diff, relevant task or ticket context, and selected PR template. For an existing PR, read its current title, body, base/head branches, head commit, and available checks. Ask only when competing repositories, branches, templates, or requirements cannot be resolved from accessible context.
+Read the request, applicable repository instructions, actual diff, and relevant task or ticket context. Locate and read the applicable PR template before drafting, including the selected template when several are available. For an existing PR, read its current title, body, base/head branches, head commit, and available checks. Ask only when competing repositories, branches, templates, or requirements cannot be resolved from accessible context.
 
 For publication, describe the pushed head represented by the PR. Keep unpushed local work out of claims about that head. If creating the PR requires committing or pushing, prepare the title and description and identify that prerequisite. This skill does not stage, commit, push, implement changes, or expand the surrounding task's authorization.
 
-Gather the actual test commands, results, captured output, and associated logs from the current task, saved artifacts, and relevant CI runs. Identify which revision or environment a result covers when it affects interpretation. A previous description's assertion that tests passed is not captured output. If task or test evidence is unavailable, state the specific gap rather than inventing it. Do not rerun tests solely to reconstruct missing logs.
+Gather actual test commands, results, captured output, and associated logs from the current task and saved artifacts. Identify which revision or environment a result covers when it affects interpretation. A previous description's assertion that tests passed is not captured output. Do not invent missing evidence or rerun tests solely to reconstruct missing logs.
+
+## Follow the PR template
+
+Treat the applicable template as the required structure. Preserve its headings, order, checklist wording, and required fields; fill them according to its instructions. Do not replace it with a stock format or add sections. If it specifically requests CI results or a complete test list, answer accurately at the requested level of detail. A generic Testing field still uses the evidence selection below.
+
+Place additional test evidence in an existing suitable testing or validation field, using expandable logs only where its format permits. If there is no suitable field, keep the template intact and provide the additional evidence in chat. For a title-only or other narrow edit, preserve unrelated body text and metadata.
+
+Without a template, write a concise description and add Testing only when there is additional evidence or a concrete relevant validation gap. Omit the section when there is nothing beyond CI to report.
+
+## Select evidence beyond CI
+
+Inspect the applicable CI workflows and the scripts, flags, test suites, and environments they invoke before choosing evidence for the description. Follow invoked targets or scripts far enough to establish coverage; compare the actual coverage rather than command names alone.
+
+- Omit local commands, results, and logs that duplicate CI coverage. A local run with materially different flags, scope, or environment can add evidence, such as race detection absent from CI or a distinct integration or hardware test. Include it when that difference helps assess the change.
+- Coverage means what the applicable CI workflow is responsible for. A pending, failed, or skipped run does not automatically turn a routine duplicate check into additional testing.
+- Omit CI status recaps and CI logs from the description unless the template explicitly requests them. Leave those results in GitHub Checks and report material CI problems briefly in chat.
+- When CI coverage cannot be established, retain relevant local evidence and explain the coverage uncertainty in chat. Do not assume a test is duplicated without evidence.
+- Keep concrete gaps in additional validation brief. Avoid hypothetical test inventories, operational disclaimers, and a general rollout checklist.
 
 ## Write the title and description
 
-Use a concise title describing the resulting change and follow repository title conventions. Explain the concrete problem and resulting behavior early in the description. Include rationale or implementation details when they help reviewers assess the change. Scale length and structure to complexity and honor the selected repository template.
+Use a concise title describing the resulting change and follow repository title conventions. Explain the concrete problem and resulting behavior in the appropriate template field, or early in the description when there is no template. Include rationale or implementation details when they help reviewers assess the change. Scale length to complexity while preserving the template's structure.
 
-Describe the final implementation for someone who has not read the conversation. Remove stale scope, abandoned approaches, and work-session narration unless a tradeoff matters to review. For a title-only or other narrow edit, preserve unrelated text and metadata rather than rewriting the whole PR.
+Describe the final implementation for someone who has not read the conversation. Remove stale scope, abandoned approaches, and work-session narration unless a tradeoff matters to review.
 
-Avoid dense "Validation: everything passed" paragraphs. Detailed validation measurements, fixture inventories, and environment output belong in expandable test logs rather than a narrative recap. Omit boilerplate about actions not performed, operator ownership, deployment boundaries, handoffs, and future PRs. Keep concrete, relevant failed, skipped, or incomplete validation in Testing, such as "Production canary: incomplete," without surrounding defensive commentary. Include a compatibility or behavior limitation only when it explains the change or affects a review decision.
+Avoid dense "Validation: everything passed" paragraphs. Measurements and environment output for selected additional tests belong in the permitted log format rather than a narrative recap. Omit boilerplate about actions not performed, operator ownership, deployment boundaries, handoffs, and future PRs. State concrete gaps in additional validation briefly, without surrounding defensive commentary. Include a compatibility or behavior limitation only when it explains the change or affects a review decision.
 
 Use plain, specific prose and regular ASCII hyphens in ordinary text. Preserve punctuation in exact output, code, quotations, official names, and required templates. Self-review the proposed text against the diff and evidence for factual accuracy, useful detail, repetition, unsupported claims, and the writing rules above.
 
-## Include Testing
+## Present the selected test evidence
 
-Every complete description includes Testing. Use the repository template's equivalent testing or validation section when present; otherwise add `## Testing`. A narrow title-only edit does not authorize adding a section to the existing body.
-
-- List each command actually run with its observed result. Use labels such as passed, failed, or interrupted; do not turn a missing result into a pass. State when no tests were run.
-- Put captured stdout/stderr and associated test logs in fenced code blocks inside expandable `<details>` sections, with a meaningful `<summary>` identifying the command or log. Keep a blank line around fenced blocks so they render correctly. Use a longer fence if the output itself contains backticks.
-- Distinguish local checks, CI, and runtime evidence. Keep results from earlier revisions or superseded failures identifiable when relevant; do not present them as results for the current head.
-- Include relevant failed, skipped, or incomplete checks briefly. List concrete validation gaps rather than hypothetical tests or operational disclaimers.
+- List each selected command actually run with its observed result. Use labels such as passed, failed, or interrupted; do not turn a missing result into a pass.
+- Include captured stdout/stderr and associated logs. When the template permits, or when there is no template, use fenced code blocks inside expandable `<details>` sections with meaningful `<summary>` labels. Otherwise follow its prescribed format. Keep blank lines around fenced blocks and use a longer fence when output contains backticks.
+- Identify a different test scope or environment briefly when it explains why the evidence adds coverage beyond CI. Keep relevant results from earlier revisions or superseded failures identifiable; do not present them as results for the current head.
 - For oversized output, link to existing accessible log artifacts and include a useful excerpt. Identify truncation or unavailable output briefly. Do not invent an artifact URL or upload logs to another service as part of this skill.
 - Redact secrets and unrelated sensitive data from output, log excerpts, artifact links, and descriptions before publishing. Mark redactions without changing the meaning of the result.
 
-Use the following shape when the repository template does not specify another. The placeholders illustrate structure; replace them only with observed evidence.
+Use the following shape only when there is no template and additional evidence warrants a Testing section. The placeholders illustrate structure; replace them only with observed evidence.
 
 ````markdown
 ## Testing
@@ -59,7 +74,7 @@ Use the following shape when the repository template does not specify another. T
 </details>
 ````
 
-When a result is known but its output was not retained, list the result with "Output unavailable." Do not manufacture a representative transcript. Include available associated logs in the same block or separate labeled blocks. Preserve consequential failures even when omitting unrelated noise from an oversized log.
+For a selected test whose result is known but whose output was not retained, list the result with "Output unavailable." Do not manufacture a representative transcript. Include available associated logs in the same block or separate labeled blocks. Preserve consequential failures even when omitting unrelated noise from an oversized log.
 
 ## Publish and verify
 

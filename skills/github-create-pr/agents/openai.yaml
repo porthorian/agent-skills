@@ -1,5 +1,5 @@
 interface:
   display_name: "Create GitHub PR"
-  short_description: "Write concise PRs with captured test output and logs"
+  short_description: "Follow PR templates and show test evidence beyond CI"
 policy:
   allow_implicit_invocation: true

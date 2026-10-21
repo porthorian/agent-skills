@@ -1,0 +1,5 @@
+interface:
+  display_name: "Session Review"
+  short_description: "Review session findings and choose fixes or tickets"
+policy:
+  allow_implicit_invocation: false

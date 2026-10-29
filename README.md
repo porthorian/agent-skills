@@ -8,3 +8,7 @@ Collection of agent skills that I use and find useful
 - [github-create-pr](skills/github-create-pr/SKILL.md): Automatically applies when asked to create or open a PR, including as part of a larger task. Follows PR templates exactly and includes test evidence beyond CI; also handles title and description updates.
 - [session-review](skills/session-review/SKILL.md): Explicitly invoke `$session-review` to review the current session for bugs, unresolved problems, and workflow improvements, then choose fixes or Linear tickets.
 - [write-clear-docs](skills/write-clear-docs/SKILL.md): Write clear technical and business documentation. Invoke `$write-clear-docs` explicitly and choose self-review or two independent reviewers when prompted.
+
+## Automations
+
+- [Sync agent skills](automations/sync-agent-skills.md): Sync local Codex skills from this repository every day at 9:00 AM America/New_York, with backups and verification.

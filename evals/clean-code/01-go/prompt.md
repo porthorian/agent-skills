@@ -1,0 +1,1 @@
+Callers of `LookupLabel` need to recognize upstream failures with `errors.Is`. Fix that behavior while retaining the public signature, successful trimming, and the `lookup label:` error context. Add focused regression coverage and run the relevant tests. Keep the work within this fixture.

@@ -1,0 +1,1 @@
+Each `notify` call without an explicit history must start with a fresh list. When a list is supplied, append to it and return that same object, including when the supplied list is empty. Preserve the transport boundary and error behavior. Fix the bug, add isolated regression tests without contacting the transport, and run the tests. Keep changes within this fixture.

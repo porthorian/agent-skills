@@ -1,0 +1,1 @@
+Clean up `preview_job` so its region normalization and blank-region errors stay consistent with `create_job` as the maintained behavior evolves. Preserve the two response shapes. Inspect the existing implementation, add focused coverage, and run the tests. Keep the change within this fixture and its current standard-library framework.

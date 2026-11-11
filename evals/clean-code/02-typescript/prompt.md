@@ -1,0 +1,1 @@
+`publish` must finish writing before its promise resolves and must propagate write failures. Keep trimming the topic and returning the trimmed value on success. Fix the implementation, add deterministic regression tests, and run them. Keep the existing Node test framework and stay within this fixture.

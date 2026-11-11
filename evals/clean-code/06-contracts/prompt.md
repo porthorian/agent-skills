@@ -1,0 +1,1 @@
+Review `parse_limit` and `parse_retries` for readability and unnecessary duplication. Preserve their documented defaults, ranges, and validation errors. Make only a useful simplification; keeping small intentional repetition is acceptable. Add focused coverage for the distinct contracts and run the tests. Keep changes within this fixture.

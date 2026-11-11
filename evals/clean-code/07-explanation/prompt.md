@@ -1,0 +1,1 @@
+Explain whether the similar normalization functions in `labels.py` should share a helper, and give examples that show their contracts. This is a discussion-only request: do not edit files or add tests.
